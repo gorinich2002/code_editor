@@ -1,0 +1,59 @@
+const subProcess = require('child_process')
+const fs = require('fs');
+
+
+exports.compileFile = () => {
+    //nodeJS использует терминал для запуска команды компиляции
+    return new Promise(async (resolve, reject) => {
+        //"g++ programs/test_file_cpp.cpp -o programs/compiled"  с помощью этой команды мы можем из файла cpp создать запускаемый файл .exe
+        subProcess.exec('g++ programs/test_file_cpp.cpp -o programs/compiled',
+            (err, stdout, stderr) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(`${stdout.toString()}\n${stderr.toString()}`)
+                }
+            })
+    })
+}
+
+exports.writeToFile = async (data) => {
+    // Здесь происходит запись с++ кода на "programs/test_file_cpp.cpp"
+    return new Promise(async (resolve, reject) => {   //используем Promise функций чтобы они  работали последовательно
+        fs.writeFile('./programs/test_file_cpp.cpp', data, err => {
+            if (err) {
+                reject(err)    //reject возвращает ошибку
+            }
+            resolve(true)  // resolve возвращает успешную выполнению
+            // file written successfully
+        });
+    })
+}
+exports.writeToInput = (data) => {
+    //Здесь происходит запись входного набора данных в "programs/input_cpp.txt"
+    return new Promise(async (resolve, reject) => {
+        fs.writeFile('programs/input_cpp.txt', data, err => {
+            if (err) {
+                reject(err)
+            }
+            resolve(true)
+            // file written successfully
+        });
+    })
+}
+
+exports.runCompiledFile = () => {
+    //Здесь также используется терминал для запуска
+    // .exe файла и  входа данных.
+    return new Promise(async (resolve, reject) => {
+        subProcess.exec('programs\\compiled < programs\\input_cpp.txt', (err, stdout, stderr) => {
+            if (err) {
+                process.exit(1)
+                reject(err)
+            } else {
+                console.log(stdout.toString())
+                resolve(`${stdout.toString()}  ${stderr.toString()}`)
+            }
+        })
+    })
+}
