@@ -7,7 +7,7 @@ const {
 
 class CompilerController {
     async compile(req, res) {
-        console.log(req.body.program)
+        // console.log(req.body.program)
         await writeToFile(req.body.program)      //функция для написания кода C++ "programs/test_file_cpp.cpp"
             .then(data => {
                 return writeToInput(req.body.input)  //функция записи входного набора данных в "programs/input cpp.txt"
