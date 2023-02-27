@@ -14,7 +14,7 @@ exports.compileFile = () => {
                     resolve(`${stdout.toString()}\n${stderr.toString()}`)
                 }
             })
-    }).catch(console.log)
+    })
 }
 
 exports.writeToFile = async (data) => {
@@ -56,5 +56,5 @@ exports.runCompiledFile = () => {
                 resolve(`${stdout.toString()}  ${stderr.toString()}`)
             }
         })
-    }).catch(err=>reject(err))
+    })
 }
