@@ -14,7 +14,7 @@ exports.compileFile = () => {
                     resolve(`${stdout.toString()}\n${stderr.toString()}`)
                 }
             })
-    })
+    }).catch(console.log)
 }
 
 exports.writeToFile = async (data) => {
@@ -39,7 +39,7 @@ exports.writeToInput = (data) => {
             resolve(true)
             // file written successfully
         });
-    })
+    }).catch(console.log)
 }
 
 exports.runCompiledFile = () => {
@@ -49,12 +49,12 @@ exports.runCompiledFile = () => {
         subProcess.exec('programs/compiled < programs/input_cpp.txt', (err, stdout, stderr) => {
             if (err) {
                 console.log(err)
-                process.exit(1)
                 reject(err)
+                process.exit(1)
             } else {
-                console.log(stdout.toString())
+                // console.log(stdout.toString())
                 resolve(`${stdout.toString()}  ${stderr.toString()}`)
             }
         })
-    })
+    }).catch(err=>reject(err))
 }

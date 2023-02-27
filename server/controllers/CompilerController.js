@@ -1,3 +1,4 @@
+const { json } = require("body-parser")
 const {
     writeToFile,
     writeToInput,
@@ -30,7 +31,7 @@ class CompilerController {
                 console.log(err)
                 res.status(400).json({    //Ответ API после неудачной компиляции или после сбоя завершения.
                     success: false,
-                    error: err
+                    error: err.toString()
                 })
             })
     }

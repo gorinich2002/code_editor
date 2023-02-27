@@ -1,5 +1,5 @@
-#include <iostream>
-int main() { int a,b;  
-std::cin >>a>>b; std::cout<<"Result: "<<a+b; 
-return 0; 
-}
+#incqqqlude <iostream>
+
+inadtqwq asdmainasda>>b>>c; std::cout<<"Result: "<<a+b1asd2+c; 
+readurn 0; 
+}adqwe

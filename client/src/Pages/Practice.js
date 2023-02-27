@@ -1,45 +1,69 @@
-// import { Helmet } from "react-helmet"
-// import Editor from 'react-simple-code-editor';
-// import Prism,{ highlight, languages } from 'prismjs';
-// import 'prismjs/components/prism-clike';
-// import 'prismjs/components/prism-cpp';
-// import 'prismjs/themes/prism.css'; 
 import Editor from "@monaco-editor/react";
 import axios from "axios";
-
+import '../assets/Editor.css';
 
 import {useState} from "react";
 function Practice() {
 
   const [output, setOutput] = useState('');
+  const [error, setError] = useState('');
+  const [input, setInput] = useState('');
 
   const sendCode = (code)=>{
-    axios.post('http://localhost:5000/compiler/compile',{program: code, input:'1 2'}).then(res => setOutput(res.data.output))
+    axios.post('http://localhost:5000/compiler/compile',{program: code, input:input})
+    .then(res => {
+      setOutput(res.data.output);
+      setError('');
+    })
+    .catch(err=>{
+      setError(err.response.data.error);
+      setOutput('');
+    })
   }
 
   const handleEditorChange = (value) => {
     setValue(value);
   };
   const [code, setCode] = useState(
-    `function add(a, b) {\n  return a + b;\n}`
+    `//write code`
   );
   const [value, setValue] = useState(code || "");
 
   return (
     <>
-      <Editor
-        height="85vh"
-        width={`100%`}
-        language={'cpp' || "javascript"}
+    <div className="horizontal-flex">
+    <Editor
+        height="80vh"
+        width={`65%`}
+        language={'cpp'}
         value={value}
         defaultValue="// some comment"
         onChange={handleEditorChange}
         theme={"vs-dark"}
       />
-    <button onClick={()=>{sendCode(value)}}>
+      <div className="output-wrapper">
+        <div className="ouput-panel">
+          <h3>Вывод</h3>
+          <div>{output}</div>
+        </div>
+        <div className="ouput-panel">
+          <h3>Ошибки</h3>
+          <div>{error}</div>
+        </div>
+      </div>
+    </div>
+      
+    <button onClick={()=>{sendCode(value)}}  className='btn btn-dark'>
       Send code
     </button>
-      <div>{output}</div>
+    <input
+    type="text"
+    className="form-control"
+    placeholder="Введите входные значения через пробел"
+    aria-label="Введите входные значения через пробел"
+    value={input}
+    onChange={(e)=>setInput(e.target.value)}
+    />
     </>
   )
 }
