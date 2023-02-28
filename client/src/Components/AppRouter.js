@@ -9,9 +9,9 @@ import { HOME_ROUTE } from '../utils/consts';
     
     return (
       <Routes>
-        {user.isAuth === true} && {authRoutes.map(({path,Component}) =>
+        {/* {user.isAuth === true} && {authRoutes.map(({path,Component}) =>
 <Route key={path} path={path} element={<Component setCount={setCount}/>} exact/>
-)}
+)} */}
 {publicRoutes.map(({path,Component}) =>
 <Route key={path} path={path} element={<Component setCount={setCount}/>} exact/>
 )}

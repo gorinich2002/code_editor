@@ -1,24 +1,20 @@
-import Admin from "./Pages/Admin";
+
 import Auth from "./Pages/Auth";
 import Guide from "./Pages/Guide";
 import Practice from "./Pages/Practice";
 import Home from "./Pages/Home";
 import Test from "./Pages/Test";
+import Chat from "./Pages/Chat"
 import {
   HOME_ROUTE,
   PRACTICE_ROUTE,
   GUIDE_ROUTE,
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
-  ADMIN_ROUTE,
   TEST_ROUTE,
+  CHAT_ROUTE,
 } from "./utils/consts";
-export const authRoutes = [
-  {
-    path: ADMIN_ROUTE,
-    Component: Admin,
-  },
-];
+
 
 export const publicRoutes = [
   {
@@ -44,5 +40,9 @@ export const publicRoutes = [
   {
     path: TEST_ROUTE,
     Component: Test,
+  },
+  {
+    path: CHAT_ROUTE,
+    Component: Chat,
   },
 ];
