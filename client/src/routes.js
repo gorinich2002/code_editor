@@ -4,7 +4,8 @@ import Guide from "./Pages/Guide";
 import Practice from "./Pages/Practice";
 import Home from "./Pages/Home";
 import Test from "./Pages/Test";
-import Chat from "./Pages/Chat"
+import Room from "./Pages/Room"
+import Chat from './Pages/Chat'
 import {
   HOME_ROUTE,
   PRACTICE_ROUTE,
@@ -12,6 +13,7 @@ import {
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
   TEST_ROUTE,
+  ROOM_ROUTE,
   CHAT_ROUTE,
 } from "./utils/consts";
 
@@ -44,5 +46,9 @@ export const publicRoutes = [
   {
     path: CHAT_ROUTE,
     Component: Chat,
+  },
+  {
+    path: ROOM_ROUTE,
+    Component: Room,
   },
 ];

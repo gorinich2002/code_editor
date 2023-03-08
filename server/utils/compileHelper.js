@@ -46,7 +46,7 @@ exports.runCompiledFile = () => {
     //Здесь также используется терминал для запуска
     // .exe файла и  входа данных.
     return new Promise(async (resolve, reject) => {
-        subProcess.exec('programs/compiled < programs/input_cpp.txt', (err, stdout, stderr) => {
+        subProcess.exec('programs\\compiled < programs\\input_cpp.txt', (err, stdout, stderr) => {
             if (err) {
                 console.log(err)
                 reject(err)

@@ -2,7 +2,7 @@ import React, { useContext, useState,useEffect } from "react";
 import { Container, FormControl, Nav, Navbar, Form, Button } from "react-bootstrap";
 import logo from '../assets/logo.png'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { CHAT_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRACTICE_ROUTE, GUIDE_ROUTE } from "../utils/consts";
+import { ROOM_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRACTICE_ROUTE, GUIDE_ROUTE } from "../utils/consts";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
@@ -48,7 +48,7 @@ const Header = observer(() => {
                            <button className='header__button'
                             onClick={() => navigate(PRACTICE_ROUTE)}>Практика</button>
                               <button className='header__button'
-                            onClick={() => navigate(CHAT_ROUTE)}>Чат</button>
+                            onClick={() => navigate(ROOM_ROUTE)}>Чат</button>
             </Nav>
              <Form className="d-flex mx-auto">
              <FormControl
