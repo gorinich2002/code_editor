@@ -17,7 +17,7 @@ const Messages = ({ messages, name }) => {
             <div className={styles.text}>{message}</div>
           </div>
         );
-      })}
+      }).reverse()}
     </div>
   );
 };
