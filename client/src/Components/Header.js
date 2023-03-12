@@ -1,7 +1,7 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext } from "react";
 import { Container, FormControl, Nav, Navbar, Form, Button } from "react-bootstrap";
 import logo from '../assets/logo.png'
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import { ROOM_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRACTICE_ROUTE, GUIDE_ROUTE } from "../utils/consts";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";

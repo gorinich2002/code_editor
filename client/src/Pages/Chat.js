@@ -71,7 +71,7 @@ const Chat = () => {
           <input
             type="text"
             name="message"
-            placeholder="What do you want to say?"
+            placeholder="Что вы хотите сказать?"
             value={message}
             onChange={handleChange}
             autoComplete="off"
@@ -89,7 +89,7 @@ const Chat = () => {
         </div>
 
         <div className='chat__button'>
-          <input type="submit"  onSubmit={handleSubmit} value="Send a message" />
+          <input type="submit"  onSubmit={handleSubmit} value="Отправить сообщение" />
         </div>
       </form>
     </div>

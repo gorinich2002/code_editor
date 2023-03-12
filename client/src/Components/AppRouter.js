@@ -2,7 +2,7 @@ import React, {  useContext } from 'react'
 import {Routes, Route, Navigate} from 'react-router-dom'
 import { authRoutes, publicRoutes } from '../routes';
 import { Context } from '..';
-import { HOME_ROUTE } from '../utils/consts';
+import { GUIDE_ROUTE, HOME_ROUTE } from '../utils/consts';
  const AppRouter = ({setCount}) => {
  
     const {user} = useContext(Context)
@@ -16,8 +16,9 @@ import { HOME_ROUTE } from '../utils/consts';
 <Route key={path} path={path} element={<Component setCount={setCount}/>} exact/>
 )}
  <Route path='*' element={<Navigate to={HOME_ROUTE}/>}/>
+
       </Routes>
     )
-  
+   
 }
 export default AppRouter

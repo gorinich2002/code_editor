@@ -9,6 +9,8 @@ import {Context} from './index'
 import { useState, useEffect, useContext } from 'react';
 import { Spinner } from 'react-bootstrap';
 import {check} from './http/userApi'
+
+
 const App = observer(() => {
   const {user} = useContext(Context)
   const [loading,setloading] = useState(true)
@@ -32,11 +34,11 @@ const App = observer(() => {
     <>
     <BrowserRouter>
         <Header/>
-	
+
 				
-				<AppRouter />
-				
-    
+				<AppRouter>
+		
+    </AppRouter>
 				<Footer/>
     </BrowserRouter>
    

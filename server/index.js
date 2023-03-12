@@ -47,7 +47,7 @@ const io = new Server(server, {
       });
   
       socket.broadcast.to(user.room).emit("message", {
-        data: { user: { name: "Admin" }, message: `${user.name} has joined in this room` },
+        data: { user: { name: "Admin" }, message: `${user.name} присоединился в комнату ${user.room}` },
       });
   
       io.to(user.room).emit("room", {
@@ -70,7 +70,7 @@ const io = new Server(server, {
         const { room, name } = user;
   
         io.to(room).emit("message", {
-          data: { user: { name: "Admin" }, message: `${name} has left this room` },
+          data: { user: { name: "Admin" }, message: `${name} покинул комнату ${user.room}` },
         });
   
         io.to(room).emit("room", {

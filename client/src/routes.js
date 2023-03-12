@@ -1,11 +1,13 @@
 
 import Auth from "./Pages/Auth";
-import Guide from "./Pages/Guide";
+import Guide from "./Pages/Guide/Guide";
 import Practice from "./Pages/Practice";
 import Home from "./Pages/Home";
 import Test from "./Pages/Test";
 import Room from "./Pages/Room"
 import Chat from './Pages/Chat'
+import p11 from "./Pages/Guide/Pages/p11";
+import p12 from "./Pages/Guide/Pages/p12";
 import {
   HOME_ROUTE,
   PRACTICE_ROUTE,
@@ -15,6 +17,8 @@ import {
   TEST_ROUTE,
   ROOM_ROUTE,
   CHAT_ROUTE,
+  p11_ROUTE,
+  p12_ROUTE
 } from "./utils/consts";
 
 
@@ -50,5 +54,13 @@ export const publicRoutes = [
   {
     path: ROOM_ROUTE,
     Component: Room,
+  },
+  {
+    path: p11_ROUTE,
+    Component: p11,
+  },
+  {
+    path: p12_ROUTE,
+    Component: p12,
   },
 ];
