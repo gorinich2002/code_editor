@@ -21,6 +21,7 @@ const Header = observer(() => {
       localStorage.clear()
       navigate(HOME_ROUTE,{ replace: true });
   }
+  console.log(user._user)
     return (
         <>
       <Navbar fixed="top" collapseOnSelect expand="md" bg="secondary" variant="secondary" className="header">

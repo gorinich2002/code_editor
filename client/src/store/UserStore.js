@@ -11,7 +11,8 @@ export default class UserStore {
         localStorage.setItem("isAuth", bool)
     }
     setUser(user) {
-        this._user = user
+        console.log('setUser',user)
+        this._user = {role: user.role, ...user.token}
         localStorage.setItem("user", JSON.stringify(user))
     }
     get isAuth() {
