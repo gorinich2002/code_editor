@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.cgi": "php",
+        "iostream": "cpp"
+    }
+}
