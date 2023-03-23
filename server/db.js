@@ -1,7 +1,7 @@
 const {Sequelize} = require('sequelize')
 
 module.exports = new Sequelize(
-    process.env.DB_NAME, // название БД
+    "postgres", // название БД
     process.env.DB_USER, //Пользователь
     process.env.DB_PASSWORD, //пароль
     {

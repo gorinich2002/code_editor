@@ -30,7 +30,7 @@ class UserController {
         const user = await User.create({ email, password: hashPassword });
         console.info(user)
         const token = generateJwt(user.id, user.email);
-        return res.json({ token });
+        return res.json({ token, role: user.role });
       }
     
       async login(req, res, next) {

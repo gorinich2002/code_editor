@@ -2,7 +2,7 @@ import React, { useContext, useState,useEffect } from "react";
 import { Container, FormControl, Nav, Navbar, Form, Button } from "react-bootstrap";
 import logo from '../assets/logo.png'
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { ROOM_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRACTICE_ROUTE, GUIDE_ROUTE } from "../utils/consts";
+import { ROOM_ROUTE, HOME_ROUTE, LOGIN_ROUTE, PRACTICE_ROUTE, GUIDE_ROUTE, ADMIN_ROUTE } from "../utils/consts";
 import { observer } from "mobx-react-lite";
 import { Context } from "..";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +39,8 @@ const Header = observer(() => {
           <Navbar.Collapse id="responsive-navbar-nav">
 
           {user.isAuth ?
-          <>
+            user._user.role === 'USER' &&
+            <>
             <Nav className="me-auto" >
               <button className='header__button'
                             onClick={() => navigate(HOME_ROUTE)}>Главная</button>
@@ -50,6 +51,23 @@ const Header = observer(() => {
                             onClick={() => navigate(PRACTICE_ROUTE)}>Практика</button>
                               <button className='header__button'
                             onClick={() => navigate(ROOM_ROUTE)}>Чат</button>
+            </Nav>
+             <Form className="d-flex mx-auto">
+             <FormControl
+               type="search"
+               placeholder="Поиск"
+               className="me-2"
+               aria-label="Search"
+             />
+             <Button variant="outline-success">Поиск</Button>
+           </Form>
+           </>
+           ||
+           user._user.role === 'ADMIN' &&
+            <>
+            <Nav className="me-auto" >
+              <button className='header__button'
+                            onClick={() => navigate(ADMIN_ROUTE)}>Новый преподаватель</button>
             </Nav>
              <Form className="d-flex mx-auto">
              <FormControl

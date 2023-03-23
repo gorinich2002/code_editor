@@ -15,6 +15,7 @@ import {
   TEST_ROUTE,
   ROOM_ROUTE,
   CHAT_ROUTE,
+  ADMIN_ROUTE,
 } from "./utils/consts";
 
 
@@ -25,6 +26,10 @@ export const publicRoutes = [
   },
   {
     path: LOGIN_ROUTE,
+    Component: Auth,
+  },
+  {
+    path: ADMIN_ROUTE,
     Component: Auth,
   },
   {
