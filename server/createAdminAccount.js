@@ -17,7 +17,7 @@ console.info(password);
         await sequelize.authenticate()
         console.log('sync');
         await sequelize.sync()
-        const candidate = await User.findOne({ where: { email } });
+        const candidate = await User.findOne({ where: { email } }).catch(()=>{});
         if (candidate) {
             console.log('Пользователь с таким email уже существует')
         } else {

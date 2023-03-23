@@ -18,7 +18,7 @@ class adminControler {
           return next(ApiError.badRequest('Некорренктный email или password'));
         }
     
-        const candidate = await User.findOne({ where: { email } });
+        const candidate = await User.findOne({ where: { email } }).catch(()=>{});
         if (candidate) {
           return next(
             ApiError.badRequest('Пользователь с таким email уже существует')

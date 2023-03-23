@@ -18,7 +18,7 @@ class UserController {
           return next(ApiError.badRequest('Некорренктный email или password'));
         }
     
-        const candidate = await User.findOne({ where: { email } });
+        const candidate = await User.findOne({ where: { email } }).catch(()=>{});
         if (candidate) {
           return next(
             ApiError.badRequest('Пользователь с таким email уже существует')
@@ -35,7 +35,7 @@ class UserController {
     
       async login(req, res, next) {
         const { email, password } = req.body;
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ where: { email } }).catch(()=>{});
         if (!user) {
           return next(ApiError.internal('Пользователь не найден'));
         }
@@ -49,7 +49,7 @@ class UserController {
       }
     
       async check(req, res, next) {
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({ where: { email } }).catch(()=>{});
         console.log(req.user.id, req.user.email, user.role);
         const token = generateJwt(req.user.id, req.user.email, user.role);
         return res.json({ token });
