@@ -3,8 +3,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const {User} = require('../models/models') 
 
-const generateJwt = (id, email) => {
-    return jwt.sign({ id, email }, process.env.SECRET_KEY, {
+const generateJwt = (id, email, role) => {
+    return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
       expiresIn: '24h',
     });
   };
@@ -29,7 +29,7 @@ class UserController {
         console.info('dxxxxxxxzxzzx');
         const user = await User.create({ email, password: hashPassword });
         console.info(user)
-        const token = generateJwt(user.id, user.email);
+        const token = generateJwt(user.id, user.email, user.role);
         return res.json({ token, role: user.role });
       }
     
@@ -43,12 +43,15 @@ class UserController {
         if (!comparePassword) {
           return next(ApiError.internal('Указан неверный пароль'));
         }
-        const token = generateJwt(user.id, user.email);
+        const token = generateJwt(user.id, user.email, user.role);
+        res.cookie('authorization', token)
         return res.json({ token, role: user.role });
       }
     
       async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.email);
+        const user = await User.findOne({ where: { email } });
+        console.log(req.user.id, req.user.email, user.role);
+        const token = generateJwt(req.user.id, req.user.email, user.role);
         return res.json({ token });
       }
 }

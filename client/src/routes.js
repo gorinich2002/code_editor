@@ -17,6 +17,7 @@ import {
   CHAT_ROUTE,
   ADMIN_ROUTE,
 } from "./utils/consts";
+import CreateTeacher from "./Pages/CreateTeacher";
 
 
 export const publicRoutes = [
@@ -30,7 +31,7 @@ export const publicRoutes = [
   },
   {
     path: ADMIN_ROUTE,
-    Component: Auth,
+    Component: CreateTeacher,
   },
   {
     path: GUIDE_ROUTE,

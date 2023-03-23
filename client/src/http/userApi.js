@@ -19,3 +19,9 @@ export const check = async () => {
     return jwt_decode(data)
 }
 
+
+export const addTeacher = async (email, password) => {
+    const token = localStorage.getItem('token');
+    const {data} = await $host.post('teacher/registration', {email, password, token})
+    return {token: jwt_decode(data.token), role: data.role}
+}
