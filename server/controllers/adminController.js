@@ -27,7 +27,7 @@ class adminControler {
         const hashPassword = await bcrypt.hash(password, 5);
         
         console.info('dxxxxxxxzxzzx');
-        const user = await User.create({ email, password: hashPassword, role: "TEACHER" });
+        const user = await User.create({ email, password: hashPassword, role_id: "TEACHER" });
         console.info(user)
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({ email });

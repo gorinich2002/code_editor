@@ -1,12 +1,13 @@
 const sequelize = require('../db')
-const {DataTypes, Sequelize} = require('sequelize')
+const {DataTypes, Sequelize} = require('sequelize');
+const roles = require('../enums/roles_ids');
 
 const User = sequelize.define('user', 
 {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
-    role_id: {type:  DataTypes.INTEGER, defaultValue: 2}, // USER ADMIN TEACHER
+    role_id: {type:  DataTypes.INTEGER, defaultValue: roles.USER}, // USER ADMIN TEACHER
     createdAt: {
         type: Sequelize.DATEONLY,
         field: 'createdat',
