@@ -99,6 +99,6 @@ const start = async () => {
 try {
   start()
 } catch (error) {
-  console.error(error)
+  console.error(error.message)
   start()
 }

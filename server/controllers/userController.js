@@ -5,6 +5,7 @@ const {User, Role} = require('../models/models')
 const roles = require('../enums/roles_ids')
 
 const generateJwt = (id, email, role) => {
+  console.log(id, email, role)
     return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
       expiresIn: '24h',
     });
@@ -34,7 +35,8 @@ class UserController {
       async login(req, res, next) {
         const { email, password } = req.body;
         const user = await User.findOne({ where: { email } }).catch(()=>{});
-        const role = await Role.findOne({where:{id: user.dataValues.role_id}})
+        let role = await Role.findOne({where:{id: user.dataValues.role_id}})
+        role = role.dataValues
         if (!user) {
           return next(ApiError.internal('Пользователь не найден'));
         }
@@ -42,9 +44,9 @@ class UserController {
         if (!comparePassword) {
           return next(ApiError.internal('Указан неверный пароль'));
         }
-        console.log(req)
-        const token = generateJwt(user.dataValues.id, user.dataValues.email, role.name);
+        const token = generateJwt(user.dataValues.id, user.dataValues.email, role.role_name);
         res.cookie('authorization', token)
+        console.log(role)
         return res.json({ token, role: role.role_name });
       }
     

@@ -1,7 +1,8 @@
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const {User} = require('../models/models') 
+const {User} = require('../models/models'); 
+const roles = require('../enums/roles_ids');
 
 const generateJwt = (id, email, role) => {
     return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
@@ -27,8 +28,7 @@ class adminControler {
         const hashPassword = await bcrypt.hash(password, 5);
         
         console.info('dxxxxxxxzxzzx');
-        const user = await User.create({ email, password: hashPassword, role_id: "TEACHER" });
-        console.info(user)
+        const user = await User.create({ email, password: hashPassword, role_id: roles.TEACHER });
         const token = generateJwt(user.id, user.email, user.role);
         return res.json({ email });
       }
