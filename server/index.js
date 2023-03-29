@@ -96,4 +96,9 @@ const start = async () => {
         console.log(e)
     }
 }
-start()
+try {
+  start()
+} catch (error) {
+  console.error(error)
+  start()
+}

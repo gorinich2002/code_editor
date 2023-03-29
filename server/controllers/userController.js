@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
-const {User} = require('../models/models') 
+const {User, Role} = require('../models/models') 
 
 const generateJwt = (id, email, role) => {
     return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
@@ -11,9 +11,7 @@ const generateJwt = (id, email, role) => {
 class UserController {
     async registration(req, res, next) {
         const { email, password } = req.body;
-        console.info(email);
-        console.info(password);
-       
+
         if (!email || !password) {
           return next(ApiError.badRequest('Некорренктный email или password'));
         }
@@ -28,14 +26,14 @@ class UserController {
         
         console.info('dxxxxxxxzxzzx');
         const user = await User.create({ email, password: hashPassword });
-        console.info(user)
-        const token = generateJwt(user.id, user.email, user.role);
-        return res.json({ token, role: user.role });
+        const token = generateJwt(user.id, user.email, "USER");
+        return res.json({ token, role: "USER"});
       }
     
       async login(req, res, next) {
         const { email, password } = req.body;
         const user = await User.findOne({ where: { email } }).catch(()=>{});
+        const role = await Role.findOne({where:{id: user.dataValues.role_id}})
         if (!user) {
           return next(ApiError.internal('Пользователь не найден'));
         }
@@ -43,15 +41,17 @@ class UserController {
         if (!comparePassword) {
           return next(ApiError.internal('Указан неверный пароль'));
         }
-        const token = generateJwt(user.id, user.email, user.role);
+        console.log(req)
+        const token = generateJwt(user.dataValues.id, user.dataValues.email, role.name);
         res.cookie('authorization', token)
-        return res.json({ token, role: user.role });
+        return res.json({ token, role: role.role_name });
       }
     
       async check(req, res, next) {
+        const { email } = req.body;
         const user = await User.findOne({ where: { email } }).catch(()=>{});
-        console.log(req.user.id, req.user.email, user.role);
-        const token = generateJwt(req.user.id, req.user.email, user.role);
+        const role = await Role.findOne({where:{id: user.dataValues.role_id}})
+        const token = generateJwt(req.user.id, req.user.email, role.role_name);
         return res.json({ token });
       }
 }
