@@ -16,13 +16,24 @@ import {
   ROOM_ROUTE,
   CHAT_ROUTE,
   ADMIN_ROUTE,
+  TASKS_ROUTE,
+  TEACHER_ROUTE
 } from "./utils/consts";
 import CreateTeacher from "./Pages/CreateTeacher";
+import Teacher from "./Pages/Teacher";
 
 
 export const publicRoutes = [
   {
     path: REGISTRATION_ROUTE,
+    Component: Auth,
+  },
+  {
+    path: TEACHER_ROUTE,
+    Component: Teacher,
+  },
+  {
+    path: TASKS_ROUTE,
     Component: Auth,
   },
   {

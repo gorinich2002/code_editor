@@ -51,11 +51,26 @@ class UserController {
       }
     
       async check(req, res, next) {
-        const { email } = req.body;
-        const user = await User.findOne({ where: { email } }).catch(()=>{});
-        const role = await Role.findOne({where:{id: user.dataValues.role_id}})
-        const token = generateJwt(req.user.id, req.user.email, role.role_name);
-        return res.json({ token });
+        try {
+          const { email } = req.body;
+          const user = await User.findOne({ where: { email } }).catch(()=>{});
+          const role = await Role.findOne({where:{id: user.dataValues.role_id}})
+          const token = generateJwt(req.user.id, req.user.email, role.role_name);
+          return res.json({ token });
+        } catch (error) {
+          return res.json({ error });
+          
+        }
+
+      }
+
+      async getAll(req, res, next) {
+    
+        const users = await User.findAll({ where: { role_id:  roles.USER} }).catch(()=>{});
+
+        console.info('dxxxxxxxzxzzx');
+
+        return res.json({ users });
       }
 }
 module.exports = new UserController()

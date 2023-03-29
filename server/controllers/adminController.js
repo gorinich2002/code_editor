@@ -30,7 +30,7 @@ class adminControler {
         console.info('dxxxxxxxzxzzx');
         const user = await User.create({ email, password: hashPassword, role_id: roles.TEACHER });
         const token = generateJwt(user.id, user.email, user.role);
-        return res.json({ email });
+        return res.json({ email, message:"123" });
       }
     
 }
