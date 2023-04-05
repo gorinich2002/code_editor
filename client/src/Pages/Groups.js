@@ -30,7 +30,7 @@ export default function Groups() {
     return <>
         <ListGroup>
             {groups.map(e => <ListGroupItem key={e.id}>
-                <div style={{ display: "flex", justifyContent: "space-around" }}>{e.id}/{e.name}</div>
+                <div style={{ display: "flex", justifyContent: "space-around" }}>{e.name}</div>
             </ListGroupItem>)}
         </ListGroup>
         <br />
