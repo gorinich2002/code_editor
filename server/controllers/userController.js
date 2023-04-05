@@ -35,7 +35,14 @@ class UserController {
       async login(req, res, next) {
         const { email, password } = req.body;
         const user = await User.findOne({ where: { email } }).catch(()=>{});
-        let role = await Role.findOne({where:{id: user.dataValues.role_id}})
+        let role;
+        try {
+          role = await Role.findOne({where:{id: user.dataValues.role_id}})
+          
+        } catch (error) {
+          res.json({message:"Неправильно указан логин или пароль"})
+          return
+        }
         role = role.dataValues
         if (!user) {
           return next(ApiError.internal('Пользователь не найден'));
@@ -67,7 +74,9 @@ class UserController {
 
       async getAll(req, res, next) {
     
-        const users = await User.findAll({ where: { role_id:  roles.USER} }).catch(()=>{});
+        const users = await User.findAll({ where: { role_id:  roles.USER} }, {order: [
+          ['id', 'DESC']
+      ]},).catch(()=>{});
 
         console.info('dxxxxxxxzxzzx');
 
