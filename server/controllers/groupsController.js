@@ -16,8 +16,6 @@ class groupsControler {
      
         const users = await User.findAll({ where: { roleID:  roles.USER} }).catch(()=>{});
 
-        console.info('dxxxxxxxzxzzx');
-
         return res.json({ users });
       }
       async getGroups(req, res, next) {
@@ -34,5 +32,15 @@ class groupsControler {
       });
       return res.json(result);
   }
+  async setGroup(req, res, next) {
+    const userId = req.params.user
+    const groupId = req.params.group
+    console.log(userId)
+    const result = await User.update({
+      group_id: groupId
+    },
+    { where: { id: userId } });
+    return res.json(result);
+}
 }
 module.exports = new groupsControler()

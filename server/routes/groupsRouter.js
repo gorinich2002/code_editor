@@ -6,6 +6,7 @@ const ifRole = require('../middleware/ifRole');
 
 router.get('/all', groupsController.getGroups);
 router.post('/add', groupsController.addGroup);
+router.post('/:user/:group', groupsController.setGroup);
 
 
 

@@ -8,6 +8,7 @@ const User = sequelize.define('user',
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
     role_id: {type:  DataTypes.INTEGER, defaultValue: roles.USER}, // USER ADMIN TEACHER
+    group_id:{type: DataTypes.INTEGER },
     createdAt: {
         type: Sequelize.DATEONLY,
         field: 'createdat',
