@@ -10,7 +10,7 @@ const generateJwt = (id, email, role) => {
       expiresIn: '24h',
     });
   };
-class adminControler {
+class groupsControler {
     async getUsers(req, res, next) {
     
      
@@ -25,8 +25,14 @@ class adminControler {
      
         const groups = await Group.findAll({}).catch(()=>{});
 
-        return res.json({ users: groups });
+        return res.json({ groups: groups });
     }
-
+    async addGroup(req, res, next) {
+    
+      const result = await Group.create({
+        name: req.body.name
+      });
+      return res.json(result);
+  }
 }
-module.exports = new adminControler()
+module.exports = new groupsControler()

@@ -45,6 +45,7 @@ class UserController {
           return next(ApiError.internal('Указан неверный пароль'));
         }
         const token = generateJwt(user.dataValues.id, user.dataValues.email, role.role_name);
+        console.log(token)
         res.cookie('authorization', token)
         console.log(role)
         return res.json({ token, role: role.role_name });

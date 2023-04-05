@@ -1,5 +1,6 @@
 
 import Auth from "./Pages/Auth";
+import Groups from "./Pages/Groups";
 import Guide from "./Pages/Guide";
 import Practice from "./Pages/Practice";
 import Home from "./Pages/Home";
@@ -17,7 +18,8 @@ import {
   CHAT_ROUTE,
   ADMIN_ROUTE,
   TASKS_ROUTE,
-  TEACHER_ROUTE
+  TEACHER_ROUTE,
+  GROUPS_ROUTE
 } from "./utils/consts";
 import CreateTeacher from "./Pages/CreateTeacher";
 import Teacher from "./Pages/Teacher";
@@ -35,6 +37,10 @@ export const publicRoutes = [
   {
     path: TASKS_ROUTE,
     Component: Auth,
+  },
+  {
+    path: GROUPS_ROUTE,
+    Component: Groups,
   },
   {
     path: LOGIN_ROUTE,

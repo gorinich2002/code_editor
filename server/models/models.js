@@ -31,9 +31,23 @@ const Role = sequelize.define('roles',
         field: 'updatedat'
       },
 })
+const Group = sequelize.define('groups', 
+{
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    name:{type:  DataTypes.STRING, unique:true},
+    createdAt: {
+        type: Sequelize.DATEONLY,
+        field: 'createdat',
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        field: 'updatedat'
+      },
+})
 User.sync();
 Role.sync();
 module.exports = {
     User,
-    Role
+    Role,
+    Group
 }
