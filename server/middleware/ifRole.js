@@ -2,8 +2,10 @@ const jwt = require('jsonwebtoken')
 
 module.exports = function(checkingRole) {
     return function (req, res, next) {
-        const token = req.headers['authorization'].split(' ')[1]// Bearer asfasnfkajsfnjk
+        console.log('authorization', req.headers['authorization']);
         console.log("req.cookies",req.cookies)
+
+        const token = req.headers['authorization'].split(' ')[1]// Bearer asfasnfkajsfnjk
         console.log("token: ", token)
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
         console.log(decoded, checkingRole)
