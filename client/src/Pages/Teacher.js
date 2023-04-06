@@ -5,6 +5,8 @@ import { $authHost, $host } from "../http";
 export default function Teacher() {
     const [users, setUsers] = useState([]);
     const [groups, setGroups] = useState([]);
+    const [selects, setSelects] = useState({});
+
     useEffect(() => {
         $authHost.get('user/all').then(data => {
             console.log(data)
@@ -17,6 +19,10 @@ export default function Teacher() {
     }, [])
 
     const onChangeSelect = (userId) => (e) => {
+        setSelects(prev => { 
+            console.log(e.target.value)
+            return {...prev, [userId]: e.target.value } 
+        })
         $authHost.post(`groups/${userId}/${e.target.value}`).then(console.log);
     }
     return <>
@@ -24,10 +30,9 @@ export default function Teacher() {
             {users.map(e => <ListGroupItem key={e.id}>
                 <div style={{ display: "flex", justifyContent: "space-around" }}>
                     <h2>{e.email}</h2>
-                    <Form.Select aria-label="Группа" style={{ maxWidth: '500px' }} defaultValue={e.group_id || 'defaut'} onChange={onChangeSelect(e.id)}>
-                    
-                        {groups.map(e=><option value={e.id}>{e.name}</option>)}
-                        <option value={'defaut'}></option>
+                    <Form.Select aria-label="Группа" style={{ maxWidth: '500px' }} value={selects[e.id] || e.group_id || null} onChange={onChangeSelect(e.id)}>
+                    <option value={null}></option>
+                        {groups.map(option=><option key={option.id} value={option.id}>{option.name}</option>)}
                     </Form.Select>
                 </div>
             </ListGroupItem>)}

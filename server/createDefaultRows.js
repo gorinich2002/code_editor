@@ -25,7 +25,7 @@ console.info(password);
             console.log('Пользователь с таким email уже существует')
         } else {
             const hashPassword = await bcrypt.hash(password, 5);
-            User.create({ email, password: hashPassword, roleID: roles.ADMIN }).then(console.log);
+            User.create({ email, password: hashPassword, role_id: roles.ADMIN }).then(console.log);
         }
     }
 
